@@ -14,20 +14,22 @@ const GameBoard = () => {
     };
 
 
-    const getBoard = board;
+    const getBoard = () => board;
 
-    const markCell = (player) => {
-        if (cell = "Empty") return;
+    const markCell = (row, col, player) => {
+        if (board[row][col] === "0") {
+            board[row][col] = player.mark;
+        } else return;
+
     };
 
-
-    return {getBoard};
+    return {getBoard, markCell};
 };
 
 
 
 gameBoardElement.addEventListener("click", ()=>{
     const gameBoardDisplay = GameBoard();
-    gameBoardElement.innerText = gameBoardDisplay.getBoard;
+    gameBoardElement.innerText = gameBoardDisplay.getBoard();
     console.log(gameBoardDisplay.getBoard);
 })
