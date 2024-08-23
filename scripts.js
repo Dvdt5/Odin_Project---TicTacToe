@@ -18,7 +18,7 @@ const GameBoard = () => {
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     };
 
-    
+    //Create the cells
     const displayCells = () => {
         for (let i = 0; i < 9;i++){
             const cellElement = document.createElement("p");
@@ -34,13 +34,14 @@ const GameBoard = () => {
         if (board[cellNumber] === "0"){
             board[cellNumber] = activePlayer.mark;
             if(checkWinning(cellNumber, activePlayer.mark)){
-                console.log("hi")
+                endGame(activePlayer);
             }; 
             switchPlayerTurn();
-        }
-        console.log(board, activePlayer);
+        };
+        console.log(board)
     };
 
+    //Check if player is winning after every move
     const checkWinning = (lastCellMarked, playerMark) => {
 
         //check the rows first
@@ -62,6 +63,22 @@ const GameBoard = () => {
                 };
             };
         };
+
+        //check diagonal
+        const diagonal = [[0,4,8],[2,4,6]];
+        for (let i = 0; i < 2;i++){
+            if (diagonal[i].includes(lastCellMarked)){
+                if (diagonal[i].every((cell)=>board[cell] === playerMark)){
+                    return true;
+                };
+            };
+        };
+
+
+    };
+
+    const endGame = (winningPlayer) => {
+        console.log(`Winner is ${winningPlayer.name}`);
     };
 
     return {playRound, displayCells, switchPlayerTurn};
