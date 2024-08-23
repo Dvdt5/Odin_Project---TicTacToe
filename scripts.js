@@ -21,8 +21,9 @@ const GameBoard = () => {
     //Create the cells
     const displayCells = () => {
         for (let i = 0; i < 9;i++){
-            const cellElement = document.createElement("p");
-            cellElement.appendChild(document.createTextNode(i));
+            const cellElement = document.createElement("div");
+            //cellElement.appendChild(document.createTextNode(i));
+            cellElement.classList.add("cell");
             gameBoardElement.appendChild(cellElement);
             cellElement.onclick = ()=>{
                 playRound(i);
@@ -35,7 +36,8 @@ const GameBoard = () => {
             board[cellNumber] = activePlayer.mark;
             if(checkWinning(cellNumber, activePlayer.mark)){
                 endGame(activePlayer);
-            }; 
+            };
+            gameBoardElement.childNodes[cellNumber].innerText = activePlayer.mark;
             switchPlayerTurn();
         };
         console.log(board)
@@ -74,6 +76,7 @@ const GameBoard = () => {
             };
         };
 
+        
 
     };
 
@@ -90,11 +93,11 @@ function startGame(playerOneName = "Player1", playerTwoName = "Player2"){
     players = [
         {
             name: playerOneName,
-            mark: 1
+            mark: "x"
         },
         {
             name: playerTwoName,
-            mark: 2
+            mark: "o"
         }
     ];
 

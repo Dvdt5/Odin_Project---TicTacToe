@@ -1,0 +1,44 @@
+* {
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: 100vh;
+    width: 100vw;
+}
+
+#left-col {
+    background-color: aqua;
+}
+
+#right-col {
+    display: grid;
+    align-items: center;
+}
+
+
+#gameboard-container {
+    margin: auto;
+    background-color: black;
+    width: 550px;
+    height: 550px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.cell {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    font-size: 130px;
+    text-align: center;
+}
+
