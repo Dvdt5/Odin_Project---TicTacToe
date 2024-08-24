@@ -9,10 +9,34 @@
 <body>
     <main>
         <div id="left-col">
-            <p id="gameboard">Click me</p>
+            <h1>TIC TAC TOE</h1>
+            <form action="" id="player-info-form">
+                <div>
+                    <label for="player-x-name-input">Player X Name</label><br>
+                    <input type="text" id="player-x-name-input" class="name-input" placeholder="Player X">
+                </div>
+                <div>
+                    <label for="player-o-name-input">Player O Name</label><br>
+                    <input type="text" id="player-o-name-input" class="name-input" placeholder="Player O">
+                </div>
+                <div id="start-game-btn-container">
+                    <button id="start-game-btn" class="btn" type="submit">Start Game</button>
+                </div>
+            </form>
         </div>
         <div id="right-col">
-            <div id="gameboard-container"></div>
+            <div id="dark-mask"></div>
+            <div id="gameboard-container">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
         </div>
     </main>
     <script src="scripts.js"></script>

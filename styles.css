@@ -8,30 +8,62 @@ body {
 
 main {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 2fr 5fr;
     height: 100vh;
     width: 100vw;
 }
 
 #left-col {
     background-color: aqua;
+    text-align: center;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    padding: 16px;
+    z-index: 3;
 }
 
 #right-col {
     display: grid;
     align-items: center;
+    z-index: 1;
+    position: relative;
 }
 
 
 #gameboard-container {
     margin: auto;
-    background-color: black;
+    background-color: gray;
     width: 550px;
     height: 550px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 16px;
+}
+
+#player-info-form {
+    text-align: center;
+
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 3fr;
+
+    font-size: 26px;
+    font-weight: bold;
+    
+}
+
+#start-game-btn-container {
+    grid-column: 1 / 3;
+}
+
+#dark-mask {
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(100, 100, 100, 0.5);
+    position: absolute;
 }
 
 .cell {
@@ -42,3 +74,11 @@ main {
     text-align: center;
 }
 
+.btn {
+    padding: 16px;
+}
+
+.name-input {
+    padding: 16px;
+    margin: 8px;
+}

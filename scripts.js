@@ -1,5 +1,6 @@
 const gameBoardElement = document.getElementById("gameboard-container");
-const button = document.getElementById("gameboard");
+const playerInfoForm = document.getElementById("player-info-form");
+const layerMask = document.getElementById("dark-mask");
 
 let players = [];
 
@@ -20,9 +21,9 @@ const GameBoard = () => {
 
     //Create the cells
     const displayCells = () => {
+        gameBoardElement.innerHTML = "";
         for (let i = 0; i < 9;i++){
             const cellElement = document.createElement("div");
-            //cellElement.appendChild(document.createTextNode(i));
             cellElement.classList.add("cell");
             gameBoardElement.appendChild(cellElement);
             cellElement.onclick = ()=>{
@@ -89,7 +90,7 @@ const GameBoard = () => {
 
 
 
-function startGame(playerOneName = "Player1", playerTwoName = "Player2"){    
+function startGame(playerOneName = "Player X", playerTwoName = "Player O"){    
     players = [
         {
             name: playerOneName,
@@ -106,6 +107,9 @@ function startGame(playerOneName = "Player1", playerTwoName = "Player2"){
 
 };
 
-button.addEventListener("click", ()=>{
+playerInfoForm.addEventListener("submit", (event)=>{
+    event.preventDefault();
+    layerMask.remove();
+    gameBoardElement.style.backgroundColor = "black";
     startGame();
 })
