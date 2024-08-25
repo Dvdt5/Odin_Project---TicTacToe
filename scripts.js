@@ -1,6 +1,13 @@
 const gameBoardElement = document.getElementById("gameboard-container");
 const playerInfoForm = document.getElementById("player-info-form");
 const layerMask = document.getElementById("dark-mask");
+const gameInfoText = document.getElementById("game-info-text");
+const gameInfoCurrentMark = document.getElementById("game-info-current-mark");
+const gameInfo = document.getElementById("game-info");
+const restartGameBtn = document.getElementById("restart-game-btn");
+
+const nameInputPlayerX = document.getElementById("player-x-name-input");
+const nameInputPlayerO = document.getElementById("player-o-name-input");
 
 let players = [];
 
@@ -35,11 +42,15 @@ const GameBoard = () => {
     const playRound = (cellNumber) => {
         if (board[cellNumber] === "0"){
             board[cellNumber] = activePlayer.mark;
+            gameBoardElement.childNodes[cellNumber].innerText = activePlayer.mark;
             if(checkWinning(cellNumber, activePlayer.mark)){
                 endGame(activePlayer);
+                activePlayer = players[0];
+                return;
             };
-            gameBoardElement.childNodes[cellNumber].innerText = activePlayer.mark;
             switchPlayerTurn();
+            gameInfoText.innerText = `${activePlayer.name}'s turn.`;
+            gameInfoCurrentMark.innerText = `${activePlayer.name}'s symbol is ${activePlayer.mark}`;
         };
         console.log(board)
     };
@@ -82,34 +93,57 @@ const GameBoard = () => {
     };
 
     const endGame = (winningPlayer) => {
-        console.log(`Winner is ${winningPlayer.name}`);
+        gameInfoText.innerText = `${winningPlayer.name} wins the game.`;
+        gameInfoCurrentMark.innerText = "";
+        gameBoardElement.style.pointerEvents = "none";
+        restartGameBtn.style.display = "initial";
     };
 
     return {playRound, displayCells, switchPlayerTurn};
 };
 
-
-
-function startGame(playerOneName = "Player X", playerTwoName = "Player O"){    
+function startGame(){
+    const playerOneName = nameInputPlayerX.value === "" ? "Player X" : nameInputPlayerX.value;
+    const playerTwoName = nameInputPlayerO.value === "" ? "Player O" : nameInputPlayerO.value;
     players = [
         {
             name: playerOneName,
-            mark: "x"
+            mark: "X"
         },
         {
             name: playerTwoName,
-            mark: "o"
+            mark: "O"
         }
     ];
 
     const board = GameBoard();
     board.displayCells();
 
+    layerMask.style.display = "none";
+    gameBoardElement.style.backgroundColor = "black";
+    playerInfoForm.style.display = "none";
+    gameInfo.style.display = "block";
+    gameInfoText.innerText = `${playerOneName}'s turn.`;
+    gameInfoCurrentMark.innerText = `${playerOneName}'s symbol is ${players[0].mark}`;
+    gameBoardElement.style.pointerEvents = "all";
 };
+
+function restartGame () {
+    layerMask.style.display = "initial";
+    gameBoardElement.style.backgroundColor = "gray";
+    playerInfoForm.style.display = "grid";
+    gameInfo.style.display = "none";
+    restartGameBtn.style.display = "none";
+
+    const board = GameBoard();
+    board.displayCells();
+}
 
 playerInfoForm.addEventListener("submit", (event)=>{
     event.preventDefault();
-    layerMask.remove();
-    gameBoardElement.style.backgroundColor = "black";
     startGame();
-})
+});
+
+restartGameBtn.addEventListener("click", ()=>{
+    restartGame();
+});

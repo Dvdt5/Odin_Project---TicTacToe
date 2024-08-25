@@ -14,12 +14,16 @@ main {
 }
 
 #left-col {
-    background-color: aqua;
+    background-color: white;
     text-align: center;
     display: grid;
     grid-template-rows: 1fr 2fr;
     padding: 16px;
     z-index: 3;
+    box-shadow: 5px 0 55px -2px rgba(0,0,0,.5);
+    box-sizing: border-box;
+    border-right: 16px solid black;
+
 }
 
 #right-col {
@@ -64,6 +68,22 @@ main {
     height: 100%;
     background-color: rgba(100, 100, 100, 0.5);
     position: absolute;
+}
+
+#game-info {
+    display: none;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+#game-info-text, #game-info-current-mark {
+    margin: 16px;
+}
+
+#restart-game-btn {
+    margin-top: 32px;
+    font-size: 20px;
+    display: none;
 }
 
 .cell {

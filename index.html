@@ -10,19 +10,24 @@
     <main>
         <div id="left-col">
             <h1>TIC TAC TOE</h1>
+            <div id="game-info">
+                <div id="game-info-text"></div>
+                <div id="game-info-current-mark"></div>
+                <button id="restart-game-btn" class="btn" type="button">Play Again</button>
+            </div>
             <form action="" id="player-info-form">
                 <div>
                     <label for="player-x-name-input">Player X Name</label><br>
-                    <input type="text" id="player-x-name-input" class="name-input" placeholder="Player X">
+                    <input type="text" id="player-x-name-input" class="name-input" placeholder="Player X" autocomplete="off">
                 </div>
                 <div>
                     <label for="player-o-name-input">Player O Name</label><br>
-                    <input type="text" id="player-o-name-input" class="name-input" placeholder="Player O">
+                    <input type="text" id="player-o-name-input" class="name-input" placeholder="Player O" autocomplete="off">
                 </div>
                 <div id="start-game-btn-container">
                     <button id="start-game-btn" class="btn" type="submit">Start Game</button>
                 </div>
-            </form>
+            </form> 
         </div>
         <div id="right-col">
             <div id="dark-mask"></div>
