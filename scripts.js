@@ -13,20 +13,19 @@ let players = [];
 
 const GameBoard = () => {
 
+    //create the actualy board
     const board = [];
-    
     for (let i = 0; i < 9;i++){
         board[i] = "0";
     };
 
-
+    //Switches players turn after succesfull marking
     let activePlayer = players[0];
-    
     const switchPlayerTurn = () => {
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     };
 
-    //Create the cells
+    //Create the cells and add event listener to each cell
     const displayCells = () => {
         gameBoardElement.innerHTML = "";
         for (let i = 0; i < 9;i++){
@@ -39,7 +38,9 @@ const GameBoard = () => {
         };
     };
     
+    //when you click on a cell it works the function
     const playRound = (cellNumber) => {
+        //checks if cell is empty then does the marking
         if (board[cellNumber] === "0"){
             board[cellNumber] = activePlayer.mark;
             gameBoardElement.childNodes[cellNumber].innerText = activePlayer.mark;
@@ -52,7 +53,6 @@ const GameBoard = () => {
             gameInfoText.innerText = `${activePlayer.name}'s turn.`;
             gameInfoCurrentMark.innerText = `${activePlayer.name}'s symbol is ${activePlayer.mark}`;
         };
-        console.log(board)
     };
 
     //Check if player is winning after every move
@@ -92,6 +92,7 @@ const GameBoard = () => {
 
     };
 
+    //Declares the winner
     const endGame = (winningPlayer) => {
         gameInfoText.innerText = `${winningPlayer.name} wins the game.`;
         gameInfoCurrentMark.innerText = "";
@@ -102,7 +103,10 @@ const GameBoard = () => {
     return {playRound, displayCells, switchPlayerTurn};
 };
 
+
+
 function startGame(){
+    //Gets players name and stores it
     const playerOneName = nameInputPlayerX.value === "" ? "Player X" : nameInputPlayerX.value;
     const playerTwoName = nameInputPlayerO.value === "" ? "Player O" : nameInputPlayerO.value;
     players = [
@@ -116,9 +120,11 @@ function startGame(){
         }
     ];
 
+    //displays the gameboard
     const board = GameBoard();
     board.displayCells();
 
+    //Css adjustments when the game starts
     layerMask.style.display = "none";
     gameBoardElement.style.backgroundColor = "black";
     playerInfoForm.style.display = "none";
@@ -128,6 +134,8 @@ function startGame(){
     gameBoardElement.style.pointerEvents = "all";
 };
 
+
+//Restarts the game all the way to player names
 function restartGame () {
     layerMask.style.display = "initial";
     gameBoardElement.style.backgroundColor = "gray";
